@@ -18,7 +18,11 @@ namespace StringManipulation
             //StringBuilderDemo();
             //WorkingWithArrays();
             //PadAndTrim();
-            SearchingStrings();
+            //SearchingStrings();
+            //OrderingStrings();
+            //TestingEquality();
+            GettingASubstring();
+            ReplacingText();
         }
 
 
@@ -190,11 +194,120 @@ namespace StringManipulation
         }
         private static void OrderingStrings()
         {
+            CompareToHelper("Mary", "Bob");
+            CompareToHelper("Mary", null);
+            CompareToHelper("Adam", "Bob");
+            CompareToHelper("Bob", "Bobby");
+            CompareToHelper("Bob", "Bob");
+            Console.WriteLine();
+            CompareHelper("Mary", "Bob");
+            CompareHelper("Mary", null);
+            CompareHelper("Adam", "Bob");
+            CompareHelper("Bob", "Bobby");
+            CompareHelper("Bob", "Bob");
+            CompareHelper(null, null);
+            CompareHelper(null, "Bob");
 
         }
         private static void CompareToHelper(string testA, string? testB)
         {
+            int resultsInt = testA.CompareTo(testB);
+            switch (resultsInt)
+            {
+                case > 0:
+                    Console.WriteLine($"CompareTo: {testB?? "null"} comes before {testA}");
+                    break;
+                case < 0:
+                    Console.WriteLine($"CompareTo: {testA} comes before {testB}");
+                    break;
+                case 0:
+                    Console.WriteLine($"CompareTo: { testA } is the same as { testB }");
+                    break;
+            }
+        }
+        private static void CompareHelper(string? testA, string? testB)
+        {
+            int resultsInt = String.Compare(testA!, testB);
+            switch (resultsInt)
+            {
+                case > 0:
+                    Console.WriteLine($"CompareTo: {testB ?? "null"} comes before {testA}");
+                    break;
+                case < 0:
+                    Console.WriteLine($"CompareTo: {testA ?? "null"} comes before {testB}");
+                    break;
+                case 0:
+                    Console.WriteLine($"CompareTo: { testA ?? "null" } is the same as { testB ?? "null" }");
+                    break;
+            }
+        }
+        private static void TestingEquality()
+        {
+            EqualityHelper("Bob", "Mary");
+            EqualityHelper(null, "");
+            EqualityHelper(" ", "");
+            EqualityHelper("Bob", "bob");
 
+
+
+            
+
+        }
+        private static void EqualityHelper(string? testA, string? testB)
+        {
+            bool resultsBoolean;
+            resultsBoolean = String.Equals(testA, testB);
+            if (resultsBoolean)
+            {
+                Console.WriteLine($"Equals: '{ testA ?? "null"}' equals '{ testB ?? "null"}'");
+            }
+            else
+            {
+                Console.WriteLine($"Equals: '{ testA ?? "null"}' does not equal '{ testB ?? "null"}'");
+            }
+            
+            resultsBoolean = String.Equals(testA, testB, StringComparison.InvariantCultureIgnoreCase);
+            if (resultsBoolean)
+            {
+                Console.WriteLine($"Equals (ignore case): '{ testA ?? "null"}' equals '{ testB ?? "null"}'");
+            }
+            else
+            {
+                Console.WriteLine($"Equals (ignore case): '{ testA ?? "null"}' does not equal '{ testB ?? "null"}'");
+            }
+            resultsBoolean = testA == testB;
+            if (resultsBoolean)
+            {
+                Console.WriteLine($"==: '{ testA ?? "null"}' equals '{ testB ?? "null"}'");
+            }
+            else
+            {
+                Console.WriteLine($"==: '{ testA ?? "null"}' does not equal '{ testB ?? "null"}'");
+            }
+            Console.WriteLine();
+        }
+        private static void GettingASubstring()
+        {
+            string testString = "This is a test of a substring. Let's see how its testing works out.";
+            string results;
+
+            results = testString.Substring(5);
+            Console.WriteLine(results);
+
+            results = testString.Substring(5, 9);
+            Console.WriteLine(results);
+        }
+
+        private static void ReplacingText()
+        {
+            string testString = "This is a test of replace. Let's see how its testing works out.";
+            string results;
+
+            results = testString.Replace("test", "trial");
+            Console.WriteLine(results);
+
+            results = testString.Replace(" test ", " trial ");
+            Console.WriteLine(results);
         }
     }
 }
